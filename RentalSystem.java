@@ -11,7 +11,21 @@ public class RentalSystem {
     public RentalSystem() {
         // Logic: Initialize the ArrayLists (fleet = new ArrayList... etc).
     }
+    // --- NEW: THE SEARCH MACHINE ---
+    public User loginUser(String email) {
+        // LOGIC: Loop through every user in the database
+        for (User u : this.users) {
+            // LOGIC: If the email matches...
+            if (u.getEmail().equalsIgnoreCase(email)) {
+                return u; // FOUND THEM! Return their existing object (with history)
+            }
+        }
+        return null; // NOT FOUND (Return null so Main knows to create a new one)
+    }
 
+    public void addUser(User u) {
+        this.users.add(u);
+    }
     // --- MANAGE VEHICLES ---
 
     public void addVehicle(Vehicle v) {
