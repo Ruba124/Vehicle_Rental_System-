@@ -42,4 +42,9 @@ public abstract class Vehicle implements Comparable<Vehicle> {
         // Logic: This enables Collections.sort(list) to work.
         return 0; // placeholder
     }
+    // Getters for display
+    public String getDetails() {
+        // Logic: Return string like "Toyota Camry ($50/day)".
+        return ""; // placeholder
+    }
 }
