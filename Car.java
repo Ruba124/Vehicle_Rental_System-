@@ -1,26 +1,31 @@
-// CHILD CLASS: Car
-// Usage: Represents standard cars. IMPLEMENTS Taxable.
-public class Car extends Vehicle implements Taxable {
+class Car extends Vehicle implements Taxable {
     
-    private int numberOfSeats;
-    private String fuelType;
+    private final int numberOfSeats;
+    private final String fuelType;
 
     public Car(String id, String brand, String model, double price, int seats, String fuel) {
         super(id, brand, model, price);
-        // Logic: Initialize specific Car attributes.
+        this.fuelType= fuel;
+        this.numberOfSeats=seats;
+        
     }
 
     @Override
     public double calculateRentalCost(int days) {
-        // Logic: Calculate base cost (price * days).
-        // Logic: Add results from calculateTax().
-        // Logic: Return total.
-        return 0.0; // placeholder
+        
+      double baseCost = this.basePricePerDay * days;
+      double totalCost = baseCost + (calculateTax()*days);
+      return totalCost;
+     
     }
 
     @Override
     public double calculateTax() {
-        // Logic: Return basePricePerDay * 0.10 (10% tax for cars).
-        return 0.0; // placeholder
+        return this.basePricePerDay*0.1;
+      
+     } 
+    @Override
+    public String getDetails() {
+        return "Car_" + super.getDetails() + " |Seats: " + numberOfSeats + " |Fuel: " + fuelType;
     }
 }

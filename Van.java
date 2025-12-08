@@ -1,25 +1,33 @@
-// CHILD CLASS: Van
-// Usage: Heavy vehicles. IMPLEMENTS Taxable.
-public class Van extends Vehicle implements Taxable {
+class Van extends Vehicle implements Taxable {
     
-    private double loadCapacity; // in kg
+    private final double loadCapacity; // in kg
 
     public Van(String id, String brand, String model, double price, double load) {
         super(id, brand, model, price);
-        // Logic: Initialize Van attributes.
+        this.loadCapacity=load;
     }
 
     @Override
     public double calculateRentalCost(int days) {
-        // Logic: Calculate base cost (price * days).
-        // Logic: Add calculateTax().
-        // Logic: Maybe add extra fee for heavy load?
-        return 0.0; // placeholder
+        double baseCost = this.basePricePerDay *days;
+        double totalCost= baseCost + (calculateTax()*days);
+        if (loadCapacity > 1000) {
+            totalCost += 25 * days;
+        }
+        return totalCost;
+     
+       
     }
 
     @Override
     public double calculateTax() {
+        return this.basePricePerDay * 0.15;
         // Logic: Return basePricePerDay * 0.15 (15% tax for commercial vans).
-        return 0.0; // placeholder
+      
     }
+    @Override
+     public String getDetails() {
+        return "Van-" + super.getDetails()+ " load capacity:" +this.loadCapacity;
+    }
+    
 }
