@@ -3,28 +3,53 @@
 import java.util.Date;
 
 public class Payment {
+    private static int counter = 1;   // Shared across all payments
+
     private String paymentId;
     private double amount;
-    private String paymentMethod; // e.g., "Credit Card", "Wallet"
+    private String paymentMethod;
     private boolean isSuccessful;
     private Date date;
 
     public Payment(double amount, String method) {
-        // Logic: Generate a unique ID (e.g., "PAY-" + Random).
-        // Logic: Set 'amount' and 'method'.
-        // Logic: Set 'date' to new Date().
-        // Logic: Default 'isSuccessful' to false.
+        this.paymentId = "PAY-" + counter;  // e.g., PAY-1, PAY-2, ...
+        counter++;                           // increment for next payment
+
+        this.amount = amount;
+        this.paymentMethod = method;
+        this.date = new Date();
+        this.isSuccessful = false;
     }
 
     public boolean processPayment() {
-        // Logic: Simulate bank connection.
-        // Logic: If amount > 0, set isSuccessful = true.
-        // Logic: Return the result (true/false).
-        return false; // placeholder
+        System.out.println("Processing payment...");
+
+        if (amount > 0) {
+            isSuccessful = true;
+        } else {
+            isSuccessful = false;
+        }
+
+        return isSuccessful;
+    }
+
+    public double getAmount() {
+    return amount;
     }
 
     public void printReceipt() {
-        // Logic: If isSuccessful is true, print details:
-        // "Paid $XXX via Credit Card on [Date]"
+        if (isSuccessful) {
+            System.out.println("====================================");
+            System.out.println("         PAYMENT RECEIPT");
+            System.out.println("====================================");
+            System.out.println("Payment ID: " + paymentId);
+            System.out.println("Amount Paid: $" + amount);
+            System.out.println("Method: " + paymentMethod);
+            System.out.println("Date: " + date.toString());
+            System.out.println("Status: SUCCESS");
+            System.out.println("====================================");
+        } else {
+            System.out.println("Payment failed. No receipt available.");
+        }
     }
 }
